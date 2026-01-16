@@ -1,94 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestingTesting</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --coveo-blue: #004990;
-            --bg-gray: #f4f7f9;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: var(--bg-gray);
-            color: #333;
-        }
-        /* Professional Header */
-        header {
-            background: #ffffff;
-            padding: 2rem;
-            border-bottom: 3px solid var(--coveo-blue);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-weight: 600;
-            letter-spacing: -1px;
-            color: var(--coveo-blue);
-        }
-        header p {
-            margin: 10px 0 0;
-            color: #666;
-            font-size: 1.1rem;
-        }
-        /* Discovery Guide for Panelists */
-        .demo-guide {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #eef2f7;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #ff9800;
-            display: flex;
-            justify-content: space-around;
-            font-size: 0.9rem;
-        }
-        .guide-item strong { color: var(--coveo-blue); }
-
-        /* Search Container */
-        .search-container {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 20px;
-            min-height: 600px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            font-size: 0.8rem;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>Ryan Wellman</h1>
-    <p>Unified Search Experience | SQL • S3 • LinkedIn</p>
-</header>
-
-<div class="demo-guide">
-    <div class="guide-item"><strong>Pain Point:</strong> Data Silos</div>
-    <div class="guide-item"><strong>Solution:</strong> Unified Indexing</div>
-    <div class="guide-item"><strong>Demo Tip:</strong> Search "Hire" for Featured Results</div>
-</div>
-
-<div class="search-container">
+<html>
+  <head>
     <script
-        async
-        onload="CoveoSearchPage.initialize('xxfa9f1e0b-d23e-4df0-a707-01316b629af7')"
-        src="https://search.cloud.coveo.com/rest/organizations/ptqq33p22hxguqssec3cxvfcoi4/searchpage/v1/interfaces/1e150b2a-98b3-4183-820f-657c451227f8/loader"
-    ></script>
-    </div>
+      type="module"
+      src="https://static.cloud.coveo.com/atomic/v3/atomic.esm.js"
+    ></script> 
+    <link
+      rel="stylesheet"
+      href="https://static.cloud.coveo.com/atomic/v3/themes/coveo.css"
+    /> 
+    <link
+      rel="stylesheet"
+      href="style.css"
+    /> 
+    <script>
+      (async () => {
+        await customElements.whenDefined("atomic-search-interface"); 
+        const searchInterface = document.querySelector("#search");
 
-<footer>
-    Built with Coveo Atomic Framework & Custom Query Pipelines
-</footer>
-
-</body>
+        await searchInterface.initialize({ 
+          accessToken: "xxfa9f1e0b-d23e-4df0-a707-01316b629af7",
+          organizationId: "ptqq33p22hxguqssec3cxvfcoi4",
+        });
+        searchInterface.executeFirstSearch(); 
+      })();
+    </script>
+  </head>
+  <body>
+    <atomic-search-interface id="search">
+      <atomic-search-layout> 
+      <!-- all Atomic components will go in here -->
+      </atomic-search-layout>
+    </atomic-search-interface>
+  </body>
 </html>
