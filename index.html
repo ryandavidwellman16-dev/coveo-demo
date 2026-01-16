@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Wellman | Senior SE Portfolio</title>
+    
+    <script type="module" src="https://static.cloud.coveo.com/atomic/v3/atomic.esm.js"></script>
+    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/v3/themes/coveo.css" />
+
+    <style>
+        /* Custom styling to match the "Professional" look */
+        :root {
+            --atomic-primary: #1352d1; /* Coveo Blue */
+            --atomic-on-primary: #ffffff;
+        }
+        body { margin: 0; font-family: sans-serif; background-color: #f8f9fa; }
+        .header { background: #1c2b39; color: white; padding: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Ryan Wellman: Senior Solution Engineer Demo</h1>
+    </div>
+
+    <atomic-search-interface id="search" 
+        search-hub="CandidatePortfolio" 
+        pipeline="Ryan_Portfolio_Pipeline">
+        
+        <atomic-search-layout>
+            <atomic-layout-section section="search">
+                <atomic-search-box placeholder="Ask me about Ryan's RAG strategy..."></atomic-search-box>
+            </atomic-layout-section>
+
+            <atomic-layout-section section="facets">
+                <atomic-facet-manager>
+                    <atomic-facet field="c_section" label="Experience Category"></atomic-facet>
+                    <atomic-facet field="c_tech_stack" label="Technical Skills"></atomic-facet>
+                    <atomic-facet field="filetype" label="Source Type"></atomic-facet>
+                </atomic-facet-manager>
+            </atomic-layout-section>
+
+            <atomic-layout-section section="main">
+                
+                <atomic-layout-section section="status">
+                    <atomic-generated-answer></atomic-generated-answer>
+                    <atomic-query-summary></atomic-query-summary>
+                </atomic-layout-section>
+
+                <atomic-layout-section section="results">
+                    <atomic-result-list>
+                        <atomic-result-template>
+                            <template>
+                                <style>
+                                    .result-header { font-weight: bold; font-size: 1.2rem; color: var(--atomic-primary); }
+                                    .excerpt { margin-top: 10px; color: #444; }
+                                </style>
+                                <atomic-result-section-title>
+                                    <atomic-result-link class="result-header"></atomic-result-link>
+                                </atomic-result-section-title>
+                                <atomic-result-section-excerpt class="excerpt">
+                                    <atomic-result-text field="excerpt"></atomic-result-text>
+                                </atomic-result-section-excerpt>
+                                <atomic-result-section-bottom-metadata>
+                                    <atomic-result-fields-list>
+                                        <atomic-result-text label="Category" field="c_section"></atomic-result-text>
+                                    </atomic-result-fields-list>
+                                </atomic-result-section-bottom-metadata>
+                            </template>
+                        </atomic-result-template>
+                    </atomic-result-list>
+                </atomic-layout-section>
+
+                <atomic-layout-section section="pagination">
+                    <atomic-load-more-results></atomic-load-more-results>
+                </atomic-layout-section>
+            </atomic-layout-section>
+        </atomic-search-layout>
+    </atomic-search-interface>
+
+    <script>
+        (async () => {
+            await customElements.whenDefined('atomic-search-interface');
+            const searchInterface = document.querySelector('#search');
+
+            // 3. Initialize with your specific credentials
+            await searchInterface.initialize({
+                accessToken: '<YOUR_API_KEY>',
+                organizationId: '<YOUR_ORG_ID>'
+            });
+
+            searchInterface.executeFirstSearch();
+        })();
+    </script>
+</body>
+</html>
