@@ -81,30 +81,27 @@
 
     <script>
     (async () => {
-        // Wait for the custom elements to be ready
         await customElements.whenDefined('atomic-search-interface');
         const searchInterface = document.querySelector('#search');
 
+        // Use the ID from your error log: ptqq33p22hxguqssec3cxvfcoi4
+        const ORG_ID = 'ptqq33p22hxguqssec3cxvfcoi4'; 
+        const API_KEY = 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7'; 
+
         try {
             await searchInterface.initialize({
-                accessToken: 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7',
-                organizationId: 'ptqq33p22hxguqssec3cxvfcoi4',
-                // Force legacy to avoid the "Next" analytics error
-                analytics: { 
-                    enabled: true, 
-                    mode: 'legacy' 
-                }
+                accessToken: API_KEY,
+                organizationId: ORG_ID,
+                // Explicitly set legacy to stop that specific warning
+                analytics: { enabled: true, mode: 'legacy' }
             });
 
-            console.log("Coveo Search Interface Initialized Successfully");
+            console.log("Interface initialized. Executing search...");
             searchInterface.executeFirstSearch();
         } catch (error) {
-            console.error("Coveo Initialization Failed:", error);
+            console.error("Initialization failed:", error);
         }
     })();
-</script>
+    </script>
 </body>
 </html>
-
-accessToken: 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7',
-                organizationId: 'ptqq33p22hxguqssec3cxvfcoi4',
