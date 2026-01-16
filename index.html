@@ -80,19 +80,31 @@
     </atomic-search-interface>
 
     <script>
-        (async () => {
-            await customElements.whenDefined('atomic-search-interface');
-            const searchInterface = document.querySelector('#search');
+    (async () => {
+        // Wait for the custom elements to be ready
+        await customElements.whenDefined('atomic-search-interface');
+        const searchInterface = document.querySelector('#search');
 
+        try {
             await searchInterface.initialize({
                 accessToken: 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7',
                 organizationId: 'ptqq33p22hxguqssec3cxvfcoi4',
-                // This line fixes the "Analytics Mode" warning
-                analytics: { enabled: true, mode: 'legacy' } 
+                // Force legacy to avoid the "Next" analytics error
+                analytics: { 
+                    enabled: true, 
+                    mode: 'legacy' 
+                }
             });
 
+            console.log("Coveo Search Interface Initialized Successfully");
             searchInterface.executeFirstSearch();
-        })();
-    </script>
+        } catch (error) {
+            console.error("Coveo Initialization Failed:", error);
+        }
+    })();
+</script>
 </body>
 </html>
+
+accessToken: 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7',
+                organizationId: 'ptqq33p22hxguqssec3cxvfcoi4',
