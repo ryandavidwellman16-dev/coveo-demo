@@ -2,106 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Ryan Wellman Demo</title>
-    
-    <script type="module" src="https://static.cloud.coveo.com/atomic/v3/atomic.esm.js"></script>
-    <link rel="stylesheet" href="https://static.cloud.coveo.com/atomic/v3/themes/coveo.css" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Wellman | Unified Intelligence Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Custom styling to match the "Professional" look */
         :root {
-            --atomic-primary: #1352d1; /* Coveo Blue */
-            --atomic-on-primary: #ffffff;
+            --coveo-blue: #004990;
+            --bg-gray: #f4f7f9;
         }
-        body { margin: 0; font-family: sans-serif; background-color: #f8f9fa; }
-        .header { background: #1c2b39; color: white; padding: 20px; text-align: center; }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: #333;
+        }
+        /* Professional Header */
+        header {
+            background: #ffffff;
+            padding: 2rem;
+            border-bottom: 3px solid var(--coveo-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: var(--coveo-blue);
+        }
+        header p {
+            margin: 10px 0 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        /* Discovery Guide for Panelists */
+        .demo-guide {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #eef2f7;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #ff9800;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9rem;
+        }
+        .guide-item strong { color: var(--coveo-blue); }
+
+        /* Search Container */
+        .search-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 600px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Ryan Wellman: Senior SE Demo</h1>
+<header>
+    <h1>Ryan Wellman</h1>
+    <p>Unified Search Experience | SQL • S3 • LinkedIn</p>
+</header>
+
+<div class="demo-guide">
+    <div class="guide-item"><strong>Pain Point:</strong> Data Silos</div>
+    <div class="guide-item"><strong>Solution:</strong> Unified Indexing</div>
+    <div class="guide-item"><strong>Demo Tip:</strong> Search "Hire" for Featured Results</div>
+</div>
+
+<div class="search-container">
+    <script
+        async
+        onload="CoveoSearchPage.initialize('xxfa9f1e0b-d23e-4df0-a707-01316b629af7')"
+        src="https://search.cloud.coveo.com/rest/organizations/ptqq33p22hxguqssec3cxvfcoi4/searchpage/v1/interfaces/1e150b2a-98b3-4183-820f-657c451227f8/loader"
+    ></script>
     </div>
 
-    <atomic-search-interface id="search" 
-        search-hub="CandidatePortfolio" 
-        pipeline="Ryan_Portfolio_Pipeline">
-        
-        <atomic-search-layout>
-            <atomic-layout-section section="search">
-                <atomic-search-box placeholder="Ask me about Ryan's RAG strategy..."></atomic-search-box>
-            </atomic-layout-section>
+<footer>
+    Built with Coveo Atomic Framework & Custom Query Pipelines
+</footer>
 
-            <atomic-layout-section section="facets">
-                <atomic-facet-manager>
-                    <atomic-facet field="c_section" label="Experience Category"></atomic-facet>
-                    <atomic-facet field="c_tech_stack" label="Technical Skills"></atomic-facet>
-                    <atomic-facet field="filetype" label="Source Type"></atomic-facet>
-                </atomic-facet-manager>
-            </atomic-layout-section>
-
-            <atomic-layout-section section="main">
-                
-                <atomic-layout-section section="status">
-                    <atomic-generated-answer></atomic-generated-answer>
-                    <atomic-query-summary></atomic-query-summary>
-                </atomic-layout-section>
-
-                <atomic-layout-section section="results">
-                    <atomic-result-list>
-                        <atomic-result-template>
-                            <template>
-                                <style>
-                                    .result-header { font-weight: bold; font-size: 1.2rem; color: var(--atomic-primary); }
-                                    .excerpt { margin-top: 10px; color: #444; }
-                                </style>
-                                <atomic-result-section-title>
-                                    <atomic-result-link class="result-header"></atomic-result-link>
-                                </atomic-result-section-title>
-                                <atomic-result-section-excerpt class="excerpt">
-                                    <atomic-result-text field="excerpt"></atomic-result-text>
-                                </atomic-result-section-excerpt>
-                                <atomic-result-section-bottom-metadata>
-                                    <atomic-result-fields-list>
-                                        <atomic-result-text label="Category" field="c_section"></atomic-result-text>
-                                    </atomic-result-fields-list>
-                                </atomic-result-section-bottom-metadata>
-                            </template>
-                        </atomic-result-template>
-                    </atomic-result-list>
-                </atomic-layout-section>
-
-                <atomic-layout-section section="pagination">
-                    <atomic-load-more-results></atomic-load-more-results>
-                </atomic-layout-section>
-            </atomic-layout-section>
-        </atomic-search-layout>
-    </atomic-search-interface>
-
-    <script>
-    (async () => {
-        await customElements.whenDefined('atomic-search-interface');
-        const searchInterface = document.querySelector('#search');
-
-        // Use the ID from your error log: ptqq33p22hxguqssec3cxvfcoi4
-        const ORG_ID = 'ptqq33p22hxguqssec3cxvfcoi4'; 
-        const API_KEY = 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7'; 
-
-        try {
-            await searchInterface.initialize({
-                accessToken: API_KEY,
-                organizationId: ORG_ID,
-                // Explicitly set legacy to stop that specific warning
-                analytics: { enabled: true, mode: 'legacy' }
-            });
-
-            console.log("Interface initialized. Executing search...");
-            searchInterface.executeFirstSearch();
-        } catch (error) {
-            console.error("Initialization failed:", error);
-        }
-    })();
-    </script>
 </body>
 </html>
