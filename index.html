@@ -21,7 +21,7 @@
 <body>
 
     <div class="header">
-        <h1>Ryan Wellman: Senior Solution Engineer Demo</h1>
+        <h1>Ryan Wellman: Senior SE Demo</h1>
     </div>
 
     <atomic-search-interface id="search" 
@@ -84,10 +84,11 @@
             await customElements.whenDefined('atomic-search-interface');
             const searchInterface = document.querySelector('#search');
 
-            // 3. Initialize with your specific credentials
             await searchInterface.initialize({
-                accessToken: '<YOUR_API_KEY>',
-                organizationId: '<YOUR_ORG_ID>'
+                accessToken: 'xxfa9f1e0b-d23e-4df0-a707-01316b629af7',
+                organizationId: 'ptqq33p22hxguqssec3cxvfcoi4',
+                // This line fixes the "Analytics Mode" warning
+                analytics: { enabled: true, mode: 'legacy' } 
             });
 
             searchInterface.executeFirstSearch();
